@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://jukto30w76kt"]
+[gd_scene load_steps=70 format=4 uid="uid://jukto30w76kt"]
 
 [ext_resource type="PackedScene" uid="uid://ccivspgvtm5mi" path="res://Scenes/world_gen.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://buxtindywluys" path="res://Scenes/UI/ui.tscn" id="2_bo1nx"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bmsfho6g62ctj" path="res://Tiles/Buildings/City.png" id="17_ee4r6"]
 [ext_resource type="Texture2D" uid="uid://xo1jb6f2q7uy" path="res://Tiles/Buildings/Village.png" id="18_gt3je"]
 [ext_resource type="Script" uid="uid://cy446pb2n1jq7" path="res://Scenes/disasters_timer.gd" id="19_fevyy"]
+[ext_resource type="PackedScene" uid="uid://c4ag7h7gxjqjd" path="res://Scenes/sfx.tscn" id="23_3pmx8"]
 
 [sub_resource type="GDScript" id="GDScript_6iyac"]
 script/source = "extends Node2D
@@ -522,6 +523,8 @@ button_group = SubResource("ButtonGroup_gt3je")
 [node name="Button5" parent="UILayer/UI/Research/HBoxContainer/TeamsSelectPanel/VBoxContainer" index="2"]
 button_group = SubResource("ButtonGroup_3pmx8")
 
+[node name="SFX" parent="." instance=ExtResource("23_3pmx8")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(0.8, 0.8)
@@ -562,3 +565,4 @@ wait_time = 5.0
 [connection signal="timeout" from="teamTimer" to="map/worldGen" method="_on_team_timer_timeout"]
 
 [editable path="UILayer/UI"]
+[editable path="SFX"]

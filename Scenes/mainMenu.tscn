@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgfilayd2xr0u"]
+[gd_scene load_steps=4 format=3 uid="uid://bgfilayd2xr0u"]
 
+[ext_resource type="PackedScene" uid="uid://c4ag7h7gxjqjd" path="res://Scenes/sfx.tscn" id="1_5pknu"]
 [ext_resource type="Script" uid="uid://bbwd3yrgfvghk" path="res://Scripts/UI/full_screen_control.gd" id="1_60k44"]
 
 [sub_resource type="GDScript" id="GDScript_h7grp"]
@@ -9,33 +10,39 @@ script/source = "extends Control
 @onready var credits_screen: Panel = $\"Credits Screen\"
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	main_menu.visible = true
 	options_menu.visible = false
 	credits_screen.visible = false
 func _on_quit_button_pressed() -> void:
+	$SFX/SFXnegative.play()
 	get_tree().quit()
-
+	
 func _on_play_button_pressed() -> void:
+	$SFX/SFXpositive.play()
 	get_tree().change_scene_to_file(\"res://Scenes/main.tscn\")
-
+	
+	
 func _on_options_button_pressed() -> void:
 	main_menu.visible = false
 	options_menu.visible = true
-
+	$SFX/SFXpositive.play()
+	
 func _on_back_pressed() -> void:
 	main_menu.visible = true
 	options_menu.visible = false
-
+	$SFX/SFXnegative.play()
+	
 func _on_credits_button_pressed() -> void:
 	main_menu.visible = false
 	credits_screen.visible = true
-
+	$SFX/SFXpositive.play()
+	
 func _on_credits_screen_back_button_pressed() -> void:
 	main_menu.visible = true
 	credits_screen.visible = false
+	$SFX/SFXnegative.play()
 "
 
 [node name="MenuUI" type="Control"]
@@ -48,7 +55,6 @@ grow_vertical = 2
 script = SubResource("GDScript_h7grp")
 
 [node name="Main Menu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -84,7 +90,14 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Quit"
 
+[node name="SFX" parent="." instance=ExtResource("1_5pknu")]
+
+[node name="BGM" parent="SFX" index="2"]
+volume_db = -10.0
+parameters/looping = true
+
 [node name="Credits Screen" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -262,3 +275,5 @@ text = "Back"
 [connection signal="pressed" from="Credits Screen/VBoxContainer/MarginContainer/creditsScreenBackButton" to="." method="_on_credits_screen_back_button_pressed"]
 [connection signal="toggled" from="Options Menu/fullScreenControl" to="Options Menu/fullScreenControl" method="_on_toggled"]
 [connection signal="pressed" from="Options Menu/Back" to="." method="_on_back_pressed"]
+
+[editable path="SFX"]

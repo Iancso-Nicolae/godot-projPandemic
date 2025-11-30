@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4ag7h7gxjqjd"]
+
+[ext_resource type="AudioStream" uid="uid://dwd46jxe110uu" path="res://Audio/positive sound.mp3" id="1_4mmcj"]
+[ext_resource type="Script" uid="uid://ceqradgyq44qu" path="res://Scenes/sfx.gd" id="1_ivd03"]
+[ext_resource type="AudioStream" uid="uid://c8cwsub8vs2os" path="res://Audio/negative sound.mp3" id="2_ivd03"]
+[ext_resource type="AudioStream" uid="uid://daastin75he0g" path="res://Audio/BG sound.mp3" id="3_ar3tc"]
+
+[node name="SFX" type="Node"]
+script = ExtResource("1_ivd03")
+
+[node name="SFXpositive" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_4mmcj")
+volume_db = -10.0
+
+[node name="SFXnegative" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_ivd03")
+volume_db = -10.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ar3tc")
+volume_db = -5.0

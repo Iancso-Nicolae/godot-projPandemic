@@ -8,6 +8,8 @@ extends Control
 @onready var hud: Control = $GUI/HUD
 @onready var time_funds_container: VBoxContainer = $GUI/HUD/Timer/TimeFundsContainer
 
+
+
 @export var is_paused = false
 
 func _ready() -> void:
@@ -23,32 +25,35 @@ func _on_resume_button_pressed() -> void:
 	hud.visible = true
 	pause_menu.visible = false
 	get_tree().paused = false
-
+	$"../../SFX/SFXpositive".play()
 
 func _on_pause_button_pressed() -> void:
 	hud.visible = false
 	pause_menu.visible = true
 	get_tree().paused = true
-
+	$"../../SFX/SFXnegative".play()
 
 func _on_main_menu_button_pressed() -> void:
 	get_tree().paused = false
+	$"../../SFX/SFXnegative".play()
 	get_tree().change_scene_to_file("res://Scenes/mainMenu.tscn")
-
 
 func _on_research_button_pressed() -> void:
 	time_funds_container.visible = false
 	hud.visible=false
 	research.visible=true
+	$"../../SFX/SFXpositive".play()
 	
 func _on_back_button_pressed() -> void:
 	time_funds_container.visible = true
 	hud.visible=true
 	research.visible=false
-
+	$"../../SFX/SFXnegative".play()
+	
 func _on_skip_button_button_down():
 	startGame()
-
+	$"../../SFX/SFXpositive".play()
+	
 func startGame():
 	map_gen.generate_map()
 	$"../../map/border".show()
@@ -56,3 +61,5 @@ func startGame():
 	$GUI/HUD/Timer.start()
 	$"../../disastersTimer".start(10)
 	$Tutorial.hide()
+	$"../../SFX/BGM".play()
+	
